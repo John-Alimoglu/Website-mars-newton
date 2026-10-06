@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newton’s Laws of Motion on Mars — NASA Perseverance</title>
+  <meta name="description" content="An educational guide to Newton's Three Laws of Motion using NASA's Perseverance rover in Jezero Crater, Mars, as the real-world physical example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="site-header" id="top">
+    <div class="header-inner container">
+      <div class="brand">
+        <a href="#top" class="brand-title">NEWTON’S LAWS</a>
+        <span class="brand-sep" aria-hidden="true">/</span>
+        <span class="brand-subtitle">Motion on Mars</span>
+      </div>
+      <nav class="site-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#three-laws" class="nav-link">The Three Laws</a></li>
+          <li><a href="#rover-systems" class="nav-link">Mars Rover</a></li>
+          <li><a href="#why-it-matters" class="nav-link">Why It Matters</a></li>
+        </ul>
+      </nav>
+      <div class="header-meta">
+        <span class="mission-tag"><span class="pulse-dot" aria-hidden="true"></span>NASA / JPL MARS 2020</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section container" aria-labelledby="hero-heading">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="section-kicker">PHYSICAL MECHANICS · JEZERO CRATER</div>
+          <h1 id="hero-heading" class="hero-title">Why a Rover Moves</h1>
+          <p class="hero-lead">
+            Newton’s three laws explain almost every movement of a Mars rover, from starting across the Martian surface to stopping and changing direction.
+          </p>
+
+          <!-- Factual Detail Panel -->
+          <div class="spec-panel" aria-label="Martian Surface and Rover Specifications">
+            <div class="spec-panel-header">
+              <span class="spec-panel-label">SURFACE METRICS & VEHICLE DATA</span>
+              <span class="spec-panel-code">JPL-SPEC 2020-M</span>
+            </div>
+            <dl class="spec-grid">
+              <div class="spec-item">
+                <dt>Mars gravity</dt>
+                <dd>~38% of Earth’s gravity <span class="unit">(3.72 m/s²)</span></dd>
+              </div>
+              <div class="spec-item">
+                <dt>Rover</dt>
+                <dd>Perseverance <span class="unit">(1,025 kg mass)</span></dd>
+              </div>
+              <div class="spec-item">
+                <dt>Location</dt>
+                <dd>Jezero Crater <span class="unit">(18.38° N, 77.58° E)</span></dd>
+              </div>
+              <div class="spec-item">
+                <dt>Drive Mechanism</dt>
+                <dd>6-wheel rocker-bogie <span class="unit">(max ~4.2 cm/s)</span></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <figure class="hero-figure">
+            <div class="figure-frame">
+              <img 
+                src="assets/images/perseverance-rochette.jpg" 
+                alt="NASA Perseverance Mars rover photographed on the rocky Martian surface at Rochette in Jezero Crater" 
+                class="hero-img"
+                width="1280" 
+                height="720"
+                loading="eager"
+                fetchpriority="high"
+              >
+              <div class="figure-reticle top-left" aria-hidden="true"></div>
+              <div class="figure-reticle top-right" aria-hidden="true"></div>
+              <div class="figure-reticle bottom-left" aria-hidden="true"></div>
+              <div class="figure-reticle bottom-right" aria-hidden="true"></div>
+            </div>
+            <figcaption class="hero-figcaption">
+              <span class="fig-label">FIGURE 0.1</span>
+              <span>Perseverance self-portrait beside the Rochette rock outcrop, Jezero Crater.</span>
+              <span class="fig-credit">Credit: NASA / JPL-Caltech / MSSS</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION DIVIDER -->
+    <div class="section-divider container" aria-hidden="true">
+      <span class="divider-line"></span>
+      <span class="divider-mark">§ 01–03</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- THE THREE LAWS WRAPPER -->
+    <div id="three-laws" class="laws-wrapper container">
+
+      <!-- LAW ONE -->
+      <article class="law-section" id="law-1" aria-labelledby="law-1-title">
+        <header class="law-header">
+          <div class="law-num-badge">LAW 01</div>
+          <h2 id="law-1-title" class="law-title">01 — An object keeps doing what it’s doing</h2>
+          <blockquote class="law-formal-statement">
+            “An object at rest stays at rest, and an object in motion stays in motion unless a force acts on it.”
+          </blockquote>
+        </header>
+
+        <div class="law-content-grid">
+          <div class="law-explanation">
+            <p class="law-text">
+              Perseverance does not simply begin moving on its own. With an inertial mass of <strong>1,025 kilograms</strong>, the rover possesses inertia: a resistance to any change in its velocity. While parked on the floor of Jezero Crater, gravitational pull downward is exactly counteracted by the normal force of the ground upward. The net force is zero.
+            </p>
+            <p class="law-text">
+              To begin rolling, electric motors inside the rover’s wheel hubs must supply torque, creating an unbalanced horizontal force that overcomes static terrain friction and rolling resistance.
+            </p>
+            <p class="law-text">
+              Once the rover is in motion, Newton’s First Law also dictates what happens when the motors shut down. Unlike an interplanetary spacecraft that coasts continuously through the vacuum of space without fuel, a rover on Mars experiences continuous external contact forces: loose regolith displacement, wheel resistance, and uneven rock inclines. These external opposing forces continuously act on the rover, decelerating it back to rest unless motor torque continues to balance them.
+            </p>
+
+            <div class="physics-aside">
+              <span class="aside-label">KEY PRINCIPLE · INERTIA</span>
+              <p>
+                Inertia depends only on mass, not gravity. Even though Perseverance weighs ~62% less on Mars than on Earth, its horizontal reluctance to start or stop moving is identical on both planets.
+              </p>
+            </div>
+          </div>
+
+          <!-- Law One Diagram: Scientific Textbook Schematic -->
+          <div class="law-diagram-card">
+            <div class="diagram-card-header">
+              <span class="diagram-tag">TEXTBOOK SCHEMATIC · FREE-BODY TRANSITIONS</span>
+              <span class="diagram-state-indicator" id="law1-state-label">STATE A: REST</span>
+            </div>
+
+            <div class="diagram-canvas-wrap">
+              <!-- Interactive SVG Diagram for Law One -->
+              <svg class="schematic-svg" id="law1-svg" viewBox="0 0 540 280" role="img" aria-label="Scientific free-body diagram showing rover at rest, motor force applied, and rover in motion">
+                <defs>
+                  <marker id="arrow-rust" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#c86446"/>
+                  </marker>
+                  <marker id="arrow-cream" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#ede9e1"/>
+                  </marker>
+                  <marker id="arrow-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#78736a"/>
+                  </marker>
+                  <pattern id="soil-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <line x1="0" y1="20" x2="20" y2="0" stroke="#252422" stroke-width="1"/>
+                  </pattern>
+                </defs>
+
+                <!-- Ground profile -->
+                <rect x="20" y="210" width="500" height="50" fill="url(#soil-pattern)" stroke="#3a3834" stroke-width="1"/>
+                <line x1="20" y1="210" x2="520" y2="210" stroke="#8c867c" stroke-width="1.5" stroke-dasharray="none"/>
+                <text x="30" y="240" class="svg-label-sub">MARTIAN REGOLITH (JEZERO CRATER BED)</text>
+
+                <!-- Grid tick marks -->
+                <line x1="100" y1="205" x2="100" y2="215" stroke="#5a564f" stroke-width="1"/>
+                <line x1="270" y1="205" x2="270" y2="215" stroke="#5a564f" stroke-width="1"/>
+                <line x1="440" y1="205" x2="440" y2="215" stroke="#5a564f" stroke-width="1"/>
+
+                <!-- Dynamic elements grouped by state -->
+                <!-- Rover simplified schematic body -->
+                <g id="law1-rover-chassis" transform="translate(180, 100)">
+                  <!-- Bogie structure -->
+                  <path d="M 20 70 L 60 45 L 120 45 L 150 70" fill="none" stroke="#a8a297" stroke-width="2.5"/>
+                  <line x1="90" y1="45" x2="90" y2="25" stroke="#a8a297" stroke-width="2"/>
+                  <!-- Main body chassis box -->
+                  <rect x="50" y="15" width="80" height="32" rx="2" fill="#1e1e21" stroke="#ede9e1" stroke-width="1.5"/>
+                  <text x="90" y="35" class="svg-rover-text" text-anchor="middle">PERSEVERANCE</text>
+                  <!-- Mast -->
+                  <line x1="115" y1="15" x2="115" y2="-15" stroke="#a8a297" stroke-width="2"/>
+                  <circle cx="115" cy="-18" r="4" fill="#1e1e21" stroke="#ede9e1" stroke-width="1.5"/>
+                  <!-- Wheels (3 visible in side elevation) -->
+                  <g class="wheel-group">
+                    <circle cx="20" cy="90" r="18" fill="#171719" stroke="#cfcac2" stroke-width="2"/>
+                    <circle cx="20" cy="90" r="6" fill="#c86446"/>
+                    <circle cx="85" cy="90" r="18" fill="#171719" stroke="#cfcac2" stroke-width="2"/>
+                    <circle cx="85" cy="90" r="6" fill="#c86446"/>
+                    <circle cx="150" cy="90" r="18" fill="#171719" stroke="#cfcac2" stroke-width="2"/>
+                    <circle cx="150" cy="90" r="6" fill="#c86446"/>
+                  </g>
+                </g>
+
+                <!-- Center of mass marker -->
+                <g id="law1-cm" transform="translate(270, 130)">
+                  <circle cx="0" cy="0" r="4" fill="#ede9e1" stroke="#121214" stroke-width="1.5"/>
+                  <text x="10" y="-8" class="svg-label-mono">C.M. (m = 1,025 kg)</text>
+                </g>
+
+                <!-- Vector: Normal Force N (upward) -->
+                <g id="law1-vec-normal" transform="translate(270, 130)">
+                  <line x1="0" y1="0" x2="0" y2="-65" stroke="#ede9e1" stroke-width="2" marker-end="url(#arrow-cream)"/>
+                  <text x="8" y="-50" class="svg-vec-label">N = 3,813 N (Ground Normal)</text>
+                </g>
+
+                <!-- Vector: Weight W (downward) -->
+                <g id="law1-vec-weight" transform="translate(270, 130)">
+                  <line x1="0" y1="0" x2="0" y2="65" stroke="#78736a" stroke-width="2" marker-end="url(#arrow-muted)"/>
+                  <text x="8" y="55" class="svg-vec-label">W = m·g_mars = 3,813 N</text>
+                </g>
+
+                <!-- Dynamic Horizontal Vectors (controlled by state buttons) -->
+                <g id="law1-horizontal-vectors">
+                  <!-- Motor tractive force -->
+                  <g id="law1-vec-drive" transform="translate(330, 190)" opacity="0">
+                    <line x1="0" y1="0" x2="90" y2="0" stroke="#c86446" stroke-width="2.5" marker-end="url(#arrow-rust)"/>
+                    <text x="45" y="-10" class="svg-vec-label rust" text-anchor="middle">F_motor = +350 N</text>
+                  </g>
+
+                  <!-- Opposing terrain resistance -->
+                  <g id="law1-vec-resist" transform="translate(200, 190)" opacity="0">
+                    <line x1="0" y1="0" x2="-60" y2="0" stroke="#78736a" stroke-width="2" marker-end="url(#arrow-muted)"/>
+                    <text x="-30" y="-10" class="svg-vec-label" text-anchor="middle">f_resistance</text>
+                  </g>
+
+                  <!-- Motion velocity badge -->
+                  <g id="law1-vel-badge" transform="translate(270, 60)">
+                    <rect x="-85" y="-16" width="170" height="26" rx="2" fill="#141416" stroke="#35332f" stroke-width="1"/>
+                    <text x="0" y="2" class="svg-label-bold" text-anchor="middle" id="law1-vel-text">VELOCITY v = 0.00 m/s (ΣF = 0)</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <!-- State Transition Controls -->
+            <div class="diagram-controls-row" role="group" aria-label="Select motion phase to inspect forces">
+              <button type="button" class="phase-btn active" data-phase="rest" id="btn-phase-rest">
+                <span class="btn-step-num">A</span>
+                <span class="btn-step-text">Rover at Rest</span>
+              </button>
+              <span class="step-connector" aria-hidden="true">→</span>
+              <button type="button" class="phase-btn" data-phase="drive" id="btn-phase-drive">
+                <span class="btn-step-num">B</span>
+                <span class="btn-step-text">Motor Force Applied</span>
+              </button>
+              <span class="step-connector" aria-hidden="true">→</span>
+              <button type="button" class="phase-btn" data-phase="moving" id="btn-phase-moving">
+                <span class="btn-step-num">C</span>
+                <span class="btn-step-text">Rover Moves & Resists</span>
+              </button>
+            </div>
+
+            <div class="diagram-footer-note" id="law1-phase-explanation">
+              <strong>Phase A (Static Equilibrium):</strong> Vertical forces balance exactly (<span class="code">N = W = 3,813 N</span>). No horizontal driving force exists. Net force <span class="code">ΣF = 0</span>, so the rover remains indefinitely at rest.
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION DIVIDER -->
+      <div class="section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-mark">§ 02</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- LAW TWO -->
+      <article class="law-section" id="law-2" aria-labelledby="law-2-title">
+        <header class="law-header">
+          <div class="law-num-badge">LAW 02</div>
+          <h2 id="law-2-title" class="law-title">02 — More force means more acceleration</h2>
+          <div class="law-equation-callout" aria-label="Equation: F equals m times a">
+            <span class="equation-main">F = ma</span>
+            <span class="equation-sub">or rearranged: <span class="eq-alt">a = F / m</span></span>
+          </div>
+        </header>
+
+        <div class="law-content-grid">
+          <div class="law-explanation">
+            <p class="law-text">
+              Newton’s Second Law connects three fundamental physical quantities: net applied force (<var>F</var>), inertial mass (<var>m</var>), and the resulting acceleration (<var>a</var>). If you apply a greater net force, the acceleration increases proportionally. If mass is greater, acceleration decreases for that same applied force.
+            </p>
+            <p class="law-text">
+              When Perseverance’s electric drive motors apply force through the wheel rims to the ground, the <strong>entire 1,025 kg vehicle</strong> accelerates. Because the rover has a substantial mass, altering its velocity—whether nudging it forward from a dead stop or climbing out of a sandy depression—demands deliberate, calibrated force.
+            </p>
+
+            <div class="physics-aside alert-aside">
+              <span class="aside-label">CRITICAL PHYSICS NOTE · GRAVITY VS. INERTIA</span>
+              <p>
+                Mars surface gravity is roughly 38% of Earth’s (~3.72 m/s²), which reduces the rover’s weight from ~10,055 N on Earth to ~3,813 N on Mars. <strong>However, lower gravity does not make the rover accelerate faster horizontally.</strong> Horizontal inertia depends solely on mass (<var>m</var> = 1,025 kg). A 300 N motor push produces an identical 0.293 m/s² acceleration on Mars as it would in flat vacuum on Earth.
+              </p>
+              <p class="sub-aside-text">
+                In fact, lower gravity makes driving <em>harder</em>: the normal force is smaller, which reduces the maximum traction before wheel slippage occurs!
+              </p>
+            </div>
+          </div>
+
+          <!-- Law Two Interactive Lab / Simulator -->
+          <div class="law-diagram-card interactive-lab">
+            <div class="diagram-card-header">
+              <span class="diagram-tag">INTERACTIVE LABORATORY · FORCE → ROVER → ACCELERATION</span>
+              <span class="diagram-state-indicator live">SIMULATOR ACTIVE</span>
+            </div>
+
+            <!-- Equation Live Visualizer -->
+            <div class="equation-visualizer">
+              <div class="eq-box eq-force">
+                <span class="eq-label">NET DRIVING FORCE (F)</span>
+                <span class="eq-val" id="val-force-display">250 <span class="unit">N</span></span>
+              </div>
+              <span class="eq-op">÷</span>
+              <div class="eq-box eq-mass">
+                <span class="eq-label">INERTIAL MASS (m)</span>
+                <span class="eq-val">1,025 <span class="unit">kg</span></span>
+              </div>
+              <span class="eq-op">=</span>
+              <div class="eq-box eq-accel highlight">
+                <span class="eq-label">ACCELERATION (a)</span>
+                <span class="eq-val" id="val-accel-display">0.244 <span class="unit">m/s²</span></span>
+              </div>
+            </div>
+
+            <!-- Visual Vector Gauge -->
+            <div class="sim-visual-stage">
+              <svg class="sim-svg" id="law2-svg" viewBox="0 0 540 180" role="img" aria-label="Visualization of force vector applied to Perseverance rover producing acceleration">
+                <!-- Track -->
+                <line x1="20" y1="140" x2="520" y2="140" stroke="#35332f" stroke-width="2"/>
+                <line x1="20" y1="140" x2="520" y2="140" stroke="#78736a" stroke-width="1" stroke-dasharray="10 10"/>
+
+                <!-- Ground markers -->
+                <text x="30" y="160" class="svg-label-sub">0 m</text>
+                <text x="270" y="160" class="svg-label-sub">METRIC DISTANCE MARKER</text>
+                <text x="490" y="160" class="svg-label-sub">+10 m</text>
+
+                <!-- Rover Group (Position dynamically animated or updated) -->
+                <g id="sim-rover-group" transform="translate(60, 50)">
+                  <!-- Wheels -->
+                  <circle cx="20" cy="85" r="14" fill="#171719" stroke="#cfcac2" stroke-width="2"/>
+                  <circle cx="20" cy="85" r="4" fill="#c86446"/>
+                  <circle cx="65" cy="85" r="14" fill="#171719" stroke="#cfcac2" stroke-width="2"/>
+                  <circle cx="65" cy="85" r="4" fill="#c86446"/>
+                  <circle cx="110" cy="85" r="14" fill="#171719" stroke="#cfcac2" stroke-width="2"/>
+                  <circle cx="110" cy="85" r="4" fill="#c86446"/>
+
+                  <!-- Suspension bars -->
+                  <path d="M 20 85 L 50 65 L 90 65 L 110 85" fill="none" stroke="#8c867c" stroke-width="2"/>
+
+                  <!-- Chassis -->
+                  <rect x="30" y="40" width="70" height="26" rx="2" fill="#1e1e21" stroke="#ede9e1" stroke-width="1.5"/>
+                  <text x="65" y="57" class="svg-rover-text" text-anchor="middle">m = 1,025 kg</text>
+
+                  <!-- Mast -->
+                  <line x1="88" y1="40" x2="88" y2="15" stroke="#8c867c" stroke-width="2"/>
+                  <circle cx="88" cy="13" r="3" fill="#ede9e1"/>
+
+                  <!-- Dynamic Force Vector Arrow -->
+                  <g id="sim-vector-force">
+                    <line id="sim-force-line" x1="105" y1="53" x2="190" y2="53" stroke="#c86446" stroke-width="3" marker-end="url(#arrow-rust)"/>
+                    <text id="sim-force-text" x="145" y="44" class="svg-vec-label rust" text-anchor="middle">F = 250 N</text>
+                  </g>
+
+                  <!-- Dynamic Acceleration Vector Arrow -->
+                  <g id="sim-vector-accel">
+                    <line id="sim-accel-line" x1="65" y1="0" x2="115" y2="0" stroke="#ede9e1" stroke-width="2.5" marker-end="url(#arrow-cream)"/>
+                    <text id="sim-accel-text" x="90" y="-8" class="svg-vec-label" text-anchor="middle">a = 0.24 m/s²</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Controls: Accessible Force Slider & Presets -->
+            <div class="slider-control-card">
+              <div class="slider-header-row">
+                <label for="force-slider" class="slider-label">APPLIED MOTOR FORCE (F):</label>
+                <div class="slider-value-badge" id="slider-val-readout">250 Newtons</div>
+              </div>
+              <input 
+                type="range" 
+                id="force-slider" 
+                name="force-slider" 
+                min="0" 
+                max="600" 
+                step="10" 
+                value="250" 
+                aria-label="Adjust applied motor force in Newtons"
+                aria-valuemin="0" 
+                aria-valuemax="600" 
+                aria-valuenow="250"
+              >
+              <div class="slider-scale-ticks" aria-hidden="true">
+                <span>0 N (Idle)</span>
+                <span>150 N (Low Crawl)</span>
+                <span>300 N (Standard)</span>
+                <span>450 N (Slope Climb)</span>
+                <span>600 N (Max Rating)</span>
+              </div>
+
+              <!-- Preset Quick Selection Buttons -->
+              <div class="preset-buttons-row">
+                <span class="preset-lead">MISSION PROFILES:</span>
+                <button type="button" class="preset-btn" data-force="100">Gentle Flat Crawl (100 N)</button>
+                <button type="button" class="preset-btn active" data-force="250">Nominal Drive (250 N)</button>
+                <button type="button" class="preset-btn" data-force="480">Crater Rim Incline (480 N)</button>
+              </div>
+            </div>
+
+            <!-- Simulation Run Action -->
+            <div class="sim-actions-strip">
+              <button type="button" class="sim-run-btn" id="btn-run-sim">
+                <span class="btn-icon" aria-hidden="true">▶</span>
+                <span class="btn-text">Test Accelerate Across Regolith</span>
+              </button>
+              <button type="button" class="sim-reset-btn" id="btn-reset-sim">Reset Position</button>
+              <div class="sim-status-telemetry" id="sim-telemetry">
+                <span>STATUS: READY</span> · <span>POSITION: 0.00 m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION DIVIDER -->
+      <div class="section-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <span class="divider-mark">§ 03</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- LAW THREE -->
+      <article class="law-section" id="law-3" aria-labelledby="law-3-title">
+        <header class="law-header">
+          <div class="law-num-badge">LAW 03</div>
+          <h2 id="law-3-title" class="law-title">03 — Every push has a push back</h2>
+          <blockquote class="law-formal-statement">
+            “For every action, there is an equal and opposite reaction.”
+          </blockquote>
+        </header>
+
+        <div class="law-content-grid">
+          <div class="law-explanation">
+            <p class="law-text">
+              Forces in nature never exist in isolation; they always occur in matched interaction pairs. When one object exerts a force on a second object, the second object simultaneously exerts an equal-magnitude force back on the first, pointing in the direct opposite direction.
+            </p>
+            <p class="law-text">
+              A common misconception is that a rover “pushes air” or “simply pushes itself forward.” Mars’ atmosphere is less than 1% as dense as Earth’s, offering almost zero aerodynamic resistance or propulsion medium. 
+            </p>
+            <p class="law-text">
+              The true motion mechanism is strictly the <strong>wheel-ground interface</strong>:
+            </p>
+
+            <ul class="physics-pair-list">
+              <li>
+                <div class="pair-icon">1</div>
+                <div>
+                  <strong>Action:</strong> The rover’s rotating wheel cleats push <em>backward</em> against the Martian regolith and bedrock (<var>F</var><sub>wheel on ground</sub>).
+                </div>
+              </li>
+              <li>
+                <div class="pair-icon">2</div>
+                <div>
+                  <strong>Reaction:</strong> The Martian ground pushes <em>forward</em> against the wheel with an equal and opposite force (<var>F</var><sub>ground on wheel</sub>).
+                </div>
+              </li>
+            </ul>
+
+            <p class="law-text">
+              It is this reaction force from the Martian ground that actually propels the 1,025 kg rover forward. If Perseverance encounters extremely loose, powdery sand with poor shear strength, the ground shears before it can supply the forward reaction force, resulting in wheel slip.
+            </p>
+          </div>
+
+          <!-- Law Three Diagram: Wheel-Ground Action-Reaction Technical View -->
+          <div class="law-diagram-card">
+            <div class="diagram-card-header">
+              <span class="diagram-tag">ACTION-REACTION PAIR · CONTACT PATCH CLOSE-UP</span>
+              <span class="diagram-state-indicator">CROSS-SECTION VIEW</span>
+            </div>
+
+            <div class="diagram-canvas-wrap">
+              <svg class="schematic-svg" id="law3-svg" viewBox="0 0 540 300" role="img" aria-label="Detailed side-view diagram of rover wheel interacting with Martian soil, showing action force backward and reaction force forward">
+                <!-- Granular Bedrock / Sand cross section -->
+                <rect x="20" y="210" width="500" height="70" fill="#1a1816" stroke="#35332e" stroke-width="1.5"/>
+                <!-- Surface line -->
+                <path d="M 20 210 Q 150 209 260 212 T 520 210" fill="none" stroke="#8c867c" stroke-width="2"/>
+                <!-- Granular Soil Hatching -->
+                <g fill="#454038" opacity="0.6">
+                  <circle cx="80" cy="235" r="2.5"/><circle cx="120" cy="245" r="3"/><circle cx="170" cy="230" r="2"/>
+                  <circle cx="230" cy="240" r="3"/><circle cx="310" cy="235" r="2.5"/><circle cx="370" cy="250" r="3"/>
+                  <circle cx="440" cy="235" r="2.5"/><circle cx="480" cy="245" r="2"/>
+                </g>
+                <text x="40" y="260" class="svg-label-sub">MARTIAN BASALTIC REGOLITH (SOIL SHEAR PLANE)</text>
+
+                <!-- Cleated Wheel Geometry -->
+                <g id="law3-wheel-assembly" transform="translate(260, 120)">
+                  <!-- Rotation indicator arc -->
+                  <path d="M -55 -15 A 60 60 0 0 1 10 -65" fill="none" stroke="#ede9e1" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow-cream)"/>
+                  <text x="-40" y="-72" class="svg-label-mono">Motor Rotation (ω)</text>
+
+                  <!-- Outer wheel rim (machined aluminum) -->
+                  <circle cx="0" cy="0" r="88" fill="#161619" stroke="#b5b0a6" stroke-width="2"/>
+                  <circle cx="0" cy="0" r="78" fill="#1b1c20" stroke="#4a4742" stroke-width="1"/>
+
+                  <!-- Internal titanium spokes (compliant curve) -->
+                  <path d="M 0 0 Q 30 40 0 78" fill="none" stroke="#78736a" stroke-width="1.5"/>
+                  <path d="M 0 0 Q -40 20 -70 30" fill="none" stroke="#78736a" stroke-width="1.5"/>
+                  <path d="M 0 0 Q 30 -40 60 -50" fill="none" stroke="#78736a" stroke-width="1.5"/>
+                  <path d="M 0 0 Q -30 -40 -40 -65" fill="none" stroke="#78736a" stroke-width="1.5"/>
+
+                  <!-- Hub motor housing -->
+                  <circle cx="0" cy="0" r="24" fill="#242327" stroke="#cfcac2" stroke-width="2"/>
+                  <circle cx="0" cy="0" r="8" fill="#c86446"/>
+                  <text x="0" y="4" class="svg-label-mono" font-size="8" text-anchor="middle" fill="#ede9e1">HUB</text>
+
+                  <!-- Wheel cleats (grousers) at rim -->
+                  <!-- Cleat at contact patch (bottom) -->
+                  <rect x="-6" y="84" width="12" height="10" rx="1" fill="#ede9e1"/>
+                  <rect x="-85" y="-6" width="10" height="12" rx="1" fill="#78736a"/>
+                  <rect x="75" y="-6" width="10" height="12" rx="1" fill="#78736a"/>
+                  <rect x="-6" y="-94" width="12" height="10" rx="1" fill="#78736a"/>
+                  <rect x="55" y="60" width="11" height="11" rx="1" fill="#78736a" transform="rotate(-45 60 65)"/>
+                  <rect x="-65" y="55" width="11" height="11" rx="1" fill="#78736a" transform="rotate(45 -60 60)"/>
+                </g>
+
+                <!-- CONTACT POINT HIGHLIGHT -->
+                <g transform="translate(260, 212)">
+                  <ellipse cx="0" cy="0" rx="20" ry="3" fill="#c86446" opacity="0.4"/>
+                  <circle cx="0" cy="0" r="3" fill="#ede9e1"/>
+                  <text x="0" y="16" class="svg-label-mono" text-anchor="middle" fill="#b5b0a6">Contact Patch (Cleat ↔ Ground)</text>
+
+                  <!-- VECTOR 1: Action (Wheel pushes backward on ground) -->
+                  <g id="vec-action">
+                    <line x1="0" y1="0" x2="-140" y2="0" stroke="#c86446" stroke-width="3" marker-end="url(#arrow-rust)"/>
+                    <rect x="-170" y="-28" width="160" height="20" rx="2" fill="#141416" stroke="#c86446" stroke-width="0.75"/>
+                    <text x="-90" y="-14" class="svg-vec-label rust" text-anchor="middle">ACTION: Wheel pushes ground</text>
+                  </g>
+
+                  <!-- VECTOR 2: Reaction (Ground pushes forward on wheel) -->
+                  <g id="vec-reaction">
+                    <line x1="0" y1="0" x2="140" y2="0" stroke="#ede9e1" stroke-width="3" marker-end="url(#arrow-cream)"/>
+                    <rect x="10" y="-28" width="160" height="20" rx="2" fill="#141416" stroke="#ede9e1" stroke-width="0.75"/>
+                    <text x="90" y="-14" class="svg-vec-label" text-anchor="middle">REACTION: Ground pushes wheel</text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Scientific Annotation Box -->
+            <div class="diagram-footer-note">
+              <strong>The Interaction Pair:</strong> The action force (<span class="rust font-bold">F<sub>wheel→ground</sub></span>) and reaction force (<span class="cream font-bold">F<sub>ground→wheel</sub></span>) are equal in magnitude (<span class="code">|F₁| = |F₂|</span>) and opposite in direction (<span class="code">F₁ = -F₂</span>). <em>Crucially:</em> they act on <strong>different bodies</strong>, which is why they do not cancel each other out and motion occurs.
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- MARS ROVER SYSTEMS SECTION -->
+    <section class="rover-section container" id="rover-systems" aria-labelledby="rover-section-title">
+      <div class="section-header-compact">
+        <div class="section-kicker">VEHICLE ARCHITECTURE & LAWS IN PRACTICE</div>
+        <h2 id="rover-section-title" class="section-heading">Physics, millions of kilometres away</h2>
+        <p class="section-sub">
+          When Perseverance traverses the crater floor, all three laws act simultaneously in every mechanical subsystem. Click any component below to inspect how physics governs its real-world function on Mars.
+        </p>
+      </div>
+
+      <div class="rover-system-grid">
+        <!-- Interactive Technical Schematic of Perseverance -->
+        <div class="rover-schematic-card">
+          <div class="schematic-toolbar">
+            <span class="schematic-title">PERSEVERANCE · SUBSYSTEM BREAKDOWN</span>
+            <span class="schematic-instruction">CLICK LABELS TO INSPECT PHYSICS</span>
+          </div>
+
+          <div class="schematic-interactive-wrap">
+            <svg class="rover-tech-svg" viewBox="0 0 600 320" role="img" aria-label="Interactive schematic diagram of NASA Perseverance rover with clickable hotspot buttons for Wheels, Motors, Suspension, and Ground contact">
+              <!-- Mars Terrain Baseline -->
+              <line x1="40" y1="270" x2="560" y2="270" stroke="#45423b" stroke-width="1.5"/>
+              <path d="M 40 270 Q 180 268 300 272 T 560 270" fill="none" stroke="#78736a" stroke-width="1" stroke-dasharray="4 4"/>
+
+              <!-- Central Rover Body Graphic -->
+              <g transform="translate(140, 70)" id="svg-rover-main">
+                <!-- Suspension: Rocker-Bogie Linkage -->
+                <path id="svg-suspension-link" d="M 120 110 L 190 70 L 260 110 M 190 70 L 190 40" fill="none" stroke="#a8a297" stroke-width="4" stroke-linejoin="round"/>
+                <path d="M 60 150 L 120 110" fill="none" stroke="#a8a297" stroke-width="3.5"/>
+                <!-- Differential Pivot Tube -->
+                <circle cx="190" cy="40" r="7" fill="#141416" stroke="#c86446" stroke-width="2.5"/>
+
+                <!-- Rover Body / Avionics Deck -->
+                <rect id="svg-body-chassis" x="110" y="20" width="170" height="65" rx="3" fill="#1e1e22" stroke="#ede9e1" stroke-width="2"/>
+                <rect x="120" y="28" width="80" height="20" fill="#28282e"/>
+                <text x="160" y="42" class="svg-label-mono" font-size="9" text-anchor="middle" fill="#8c867c">AVIONICS/RTG</text>
+
+                <!-- Remote Sensing Mast -->
+                <line x1="240" y1="20" x2="240" y2="-35" stroke="#cfcac2" stroke-width="3"/>
+                <rect x="230" y="-48" width="22" height="15" rx="2" fill="#18181a" stroke="#ede9e1" stroke-width="1.5"/>
+                <circle cx="236" cy="-40" r="2.5" fill="#c86446"/>
+                <circle cx="245" cy="-40" r="2.5" fill="#ede9e1"/>
+
+                <!-- Robotic Turret Arm (Front) -->
+                <path d="M 275 60 L 320 90 L 335 140" fill="none" stroke="#78736a" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="335" cy="140" r="6" fill="#1e1e21" stroke="#ede9e1" stroke-width="1.5"/>
+
+                <!-- Wheels & In-Wheel Motors (3 Front, 3 Rear - side elevation shows 3) -->
+                <!-- Rear Wheel -->
+                <g class="hotspot-target" data-part="wheels">
+                  <circle cx="60" cy="170" r="28" fill="#161619" stroke="#cfcac2" stroke-width="2.5"/>
+                  <circle cx="60" cy="170" r="10" fill="#2b2a2e" stroke="#c86446" stroke-width="2"/>
+                  <!-- Cleat accents -->
+                  <line x1="60" y1="142" x2="60" y2="148" stroke="#ede9e1" stroke-width="2"/>
+                  <line x1="60" y1="192" x2="60" y2="198" stroke="#ede9e1" stroke-width="2"/>
+                </g>
+
+                <!-- Middle Wheel -->
+                <g class="hotspot-target" data-part="wheels">
+                  <circle cx="170" cy="170" r="28" fill="#161619" stroke="#cfcac2" stroke-width="2.5"/>
+                  <circle cx="170" cy="170" r="10" fill="#2b2a2e" stroke="#c86446" stroke-width="2"/>
+                  <line x1="170" y1="142" x2="170" y2="148" stroke="#ede9e1" stroke-width="2"/>
+                  <line x1="170" y1="192" x2="170" y2="198" stroke="#ede9e1" stroke-width="2"/>
+                </g>
+
+                <!-- Front Wheel -->
+                <g class="hotspot-target" data-part="wheels">
+                  <circle cx="290" cy="170" r="28" fill="#161619" stroke="#cfcac2" stroke-width="2.5"/>
+                  <circle cx="290" cy="170" r="10" fill="#2b2a2e" stroke="#c86446" stroke-width="2"/>
+                  <line x1="290" y1="142" x2="290" y2="148" stroke="#ede9e1" stroke-width="2"/>
+                  <line x1="290" y1="192" x2="290" y2="198" stroke="#ede9e1" stroke-width="2"/>
+                </g>
+              </g>
+
+              <!-- Interactive Clickable Callout Markers & Connecting Callout Lines -->
+
+              <!-- 1. SUSPENSION CALLOUT -->
+              <g class="callout-group" id="callout-suspension" tabindex="0" role="button" aria-label="Select Suspension system details">
+                <line x1="330" y1="110" x2="270" y2="50" stroke="#c86446" stroke-width="1" stroke-dasharray="2 2"/>
+                <circle cx="330" cy="110" r="4" fill="#c86446"/>
+                <rect x="200" y="32" width="105" height="24" rx="2" fill="#18181b" stroke="#35332f" class="tag-bg"/>
+                <text x="252" y="48" class="callout-text" text-anchor="middle">SUSPENSION</text>
+              </g>
+
+              <!-- 2. MOTORS CALLOUT -->
+              <g class="callout-group" id="callout-motors" tabindex="0" role="button" aria-label="Select Motor system details">
+                <line x1="430" y1="240" x2="490" y2="190" stroke="#c86446" stroke-width="1" stroke-dasharray="2 2"/>
+                <circle cx="430" cy="240" r="4" fill="#c86446"/>
+                <rect x="445" y="172" width="85" height="24" rx="2" fill="#18181b" stroke="#35332f" class="tag-bg"/>
+                <text x="487" y="188" class="callout-text" text-anchor="middle">MOTORS</text>
+              </g>
+
+              <!-- 3. WHEELS CALLOUT -->
+              <g class="callout-group active" id="callout-wheels" tabindex="0" role="button" aria-label="Select Wheels system details">
+                <line x1="200" y1="240" x2="110" y2="190" stroke="#c86446" stroke-width="1" stroke-dasharray="2 2"/>
+                <circle cx="200" cy="240" r="4" fill="#c86446"/>
+                <rect x="65" y="172" width="85" height="24" rx="2" fill="#18181b" stroke="#35332f" class="tag-bg"/>
+                <text x="107" y="188" class="callout-text" text-anchor="middle">WHEELS</text>
+              </g>
+
+              <!-- 4. GROUND CONTACT CALLOUT -->
+              <g class="callout-group" id="callout-ground" tabindex="0" role="button" aria-label="Select Ground contact details">
+                <line x1="310" y1="270" x2="310" y2="295" stroke="#c86446" stroke-width="1" stroke-dasharray="2 2"/>
+                <circle cx="310" cy="270" r="4" fill="#c86446"/>
+                <rect x="235" y="285" width="150" height="24" rx="2" fill="#18181b" stroke="#35332f" class="tag-bg"/>
+                <text x="310" y="301" class="callout-text" text-anchor="middle">GROUND CONTACT</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Tab Button Bar for Accessibility / Mobile -->
+          <div class="part-selector-tabs" role="tablist" aria-label="Rover Subsystems">
+            <button type="button" class="part-tab-btn active" role="tab" id="tab-wheels" aria-selected="true" aria-controls="panel-part-info" data-target="wheels">
+              1. Wheels
+            </button>
+            <button type="button" class="part-tab-btn" role="tab" id="tab-motors" aria-selected="false" aria-controls="panel-part-info" data-target="motors">
+              2. Motors
+            </button>
+            <button type="button" class="part-tab-btn" role="tab" id="tab-suspension" aria-selected="false" aria-controls="panel-part-info" data-target="suspension">
+              3. Suspension
+            </button>
+            <button type="button" class="part-tab-btn" role="tab" id="tab-ground" aria-selected="false" aria-controls="panel-part-info" data-target="ground">
+              4. Ground Contact
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Spec Detail Panel for Clicked Part -->
+        <div class="rover-part-detail-card" id="panel-part-info" role="tabpanel" aria-labelledby="tab-wheels">
+          <div class="part-detail-header">
+            <span class="part-subsystem-tag" id="part-tag">SUBSYSTEM 01 / TRACTION</span>
+            <h3 class="part-detail-title" id="part-title">Wheels (Aluminum Rims & Grousers)</h3>
+          </div>
+
+          <div class="part-law-badge" id="part-law-link">
+            PRIMARY CONNECTION: <strong>NEWTON’S THIRD LAW</strong>
+          </div>
+
+          <p class="part-detail-desc" id="part-description">
+            Perseverance carries six 52.5 cm diameter wheels machined from solid aluminum billets, reinforced with curved titanium spokes. Forty-eight chevron-profile cleats (grousers) bite into Martian soil. Each cleat applies an action force backward into the dust so that the ground can push the wheel forward.
+          </p>
+
+          <div class="part-metrics-grid" id="part-metrics">
+            <div class="metric-cell">
+              <span class="metric-name">Diameter</span>
+              <span class="metric-val">52.5 cm</span>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-name">Material</span>
+              <span class="metric-val">Aircraft Al 7075-T73</span>
+            </div>
+            <div class="metric-cell">
+              <span class="metric-name">Cleats</span>
+              <span class="metric-val">48 Curved Grousers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION DIVIDER -->
+    <div class="section-divider container" aria-hidden="true">
+      <span class="divider-line"></span>
+      <span class="divider-mark">SUMMARY</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- QUICK RECAP SECTION -->
+    <section class="recap-section container" aria-labelledby="recap-heading">
+      <div class="section-header-compact text-center">
+        <div class="section-kicker">PHYSICAL SUMMARY</div>
+        <h2 id="recap-heading" class="section-heading">The Laws at a Glance</h2>
+      </div>
+
+      <div class="recap-grid">
+        <!-- FIRST LAW RECAP -->
+        <div class="recap-col">
+          <div class="recap-header">
+            <span class="recap-num">I</span>
+            <span class="recap-law-tag">FIRST LAW</span>
+          </div>
+          <h3 class="recap-principle">Motion changes when an external force acts.</h3>
+          <p class="recap-rover-statement">
+            Perseverance remains stationary on the floor of Jezero Crater until its wheel actuators generate enough torque to overcome ground resistance, and will slowly coast to a stop once driving torque ceases.
+          </p>
+        </div>
+
+        <!-- SECOND LAW RECAP -->
+        <div class="recap-col">
+          <div class="recap-header">
+            <span class="recap-num">II</span>
+            <span class="recap-law-tag">SECOND LAW</span>
+          </div>
+          <h3 class="recap-principle">Force, mass, and acceleration are connected.</h3>
+          <p class="recap-rover-statement">
+            Because Perseverance has an inertial mass of 1,025 kg, accelerating the vehicle requires calibrated motor force via <var>F = ma</var>, regardless of Mars’ lower gravitational pull.
+          </p>
+        </div>
+
+        <!-- THIRD LAW RECAP -->
+        <div class="recap-col">
+          <div class="recap-header">
+            <span class="recap-num">III</span>
+            <span class="recap-law-tag">THIRD LAW</span>
+          </div>
+          <h3 class="recap-principle">Forces always come in interacting pairs.</h3>
+          <p class="recap-rover-statement">
+            The rover advances across the Martian surface solely because the bedrock and regolith push forward against the wheels in direct reaction to the wheels pushing backward.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY IT MATTERS SECTION -->
+    <section class="why-section container" id="why-it-matters" aria-labelledby="why-heading">
+      <div class="why-card">
+        <div class="why-header">
+          <span class="section-kicker">ENGINEERING AT 225 MILLION KILOMETRES</span>
+          <h2 id="why-heading" class="section-heading">Why Newtonian Mechanics Matter to JPL Engineers</h2>
+        </div>
+        <div class="why-columns">
+          <div class="why-item">
+            <h4>Autonomous Navigation (AutoNav)</h4>
+            <p>
+              Radio signals between Earth and Mars take anywhere from 5 to 20 minutes each way. Mission controllers cannot steer in real time with a joystick. Perseverance’s onboard navigation computers continuously calculate the rover’s inertia, momentum, and braking distance using Newton’s Second Law to safely skirt boulders without human intervention.
+            </p>
+          </div>
+          <div class="why-item">
+            <h4>Wheel Slip & Hazard Avoidance</h4>
+            <p>
+              On steep 30° crater rim slopes, the normal force drops (<var>N = mg cos θ</var>), drastically reducing available grip under Newton’s Third Law. Flight software measures the difference between commanded wheel revolutions and visual odometer tracking to halt motors before wheels excavate themselves into loose regolith.
+            </p>
+          </div>
+          <div class="why-item">
+            <h4>Precision Touchdown (EDL)</h4>
+            <p>
+              During the famous Sky Crane maneuver, thrusters fired upward to precisely match the downward pull of Martian gravity, creating zero net force (<var>ΣF = 0</var>) so the 1,025 kg rover could be lowered onto its wheels at a gentle, constant 0.75 m/s.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-primary">
+        <p class="footer-purpose">Built to explain physics through exploration.</p>
+        <p class="footer-credits">Images and mission information: NASA / JPL-Caltech.</p>
+      </div>
+      <div class="footer-secondary">
+        <span class="footer-meta">Mars 2020 Mission · Perseverance Rover · Jezero Crater, Mars</span>
+        <a href="#top" class="back-to-top" aria-label="Back to top of page">Return to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
