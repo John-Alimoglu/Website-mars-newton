@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLawOne();
   initLawTwo();
   initDroneSubsystems();
+  initCookieBanner();
 });
 
 /* ==========================================================================
@@ -356,4 +357,59 @@ function initDroneSubsystems() {
       selectPart(hotspot.dataset.part);
     });
   });
+}
+
+/* ==========================================================================
+   COOKIE & TELEMETRY CONSENT BANNER
+   ========================================================================== */
+
+function initCookieBanner() {
+  const banner = document.getElementById('cookie-banner');
+  const btnAccept = document.getElementById('btn-cookie-accept');
+  const btnEssential = document.getElementById('btn-cookie-essential');
+  const btnClose = document.getElementById('btn-cookie-close');
+  const linkPrefs = document.getElementById('link-cookie-preferences');
+
+  if (!banner) return;
+
+  // Check if previously dismissed
+  const consentStored = localStorage.getItem('mars_newton_cookie_consent');
+  if (consentStored) {
+    banner.classList.add('hidden');
+    banner.style.display = 'none';
+  } else {
+    // Show with slight entrance delay
+    setTimeout(() => {
+      banner.classList.remove('hidden');
+    }, 400);
+  }
+
+  function dismissBanner(choice) {
+    localStorage.setItem('mars_newton_cookie_consent', choice || 'accepted');
+    banner.classList.add('hidden');
+    setTimeout(() => {
+      banner.style.display = 'none';
+    }, 280);
+  }
+
+  if (btnAccept) {
+    btnAccept.addEventListener('click', () => dismissBanner('all'));
+  }
+  if (btnEssential) {
+    btnEssential.addEventListener('click', () => dismissBanner('essential'));
+  }
+  if (btnClose) {
+    btnClose.addEventListener('click', () => dismissBanner('dismissed'));
+  }
+
+  // Allow reopening from footer link
+  if (linkPrefs) {
+    linkPrefs.addEventListener('click', (e) => {
+      e.preventDefault();
+      banner.style.display = 'block';
+      // Force layout reflow before removing hidden class for smooth transition
+      void banner.offsetHeight;
+      banner.classList.remove('hidden');
+    });
+  }
 }

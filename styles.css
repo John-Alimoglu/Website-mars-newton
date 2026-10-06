@@ -1453,6 +1453,174 @@ input[type="range"]::-moz-range-thumb {
   text-decoration: underline;
 }
 
+.footer-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer-cookie-link {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--trans-fast);
+}
+
+.footer-cookie-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.footer-sep {
+  color: var(--border-strong);
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   COOKIE & TELEMETRY POPUP BANNER
+   ========================================================================== */
+
+.cookie-banner {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  max-width: 420px;
+  width: calc(100% - 3rem);
+  z-index: 999;
+  background: rgba(22, 22, 25, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-rust);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  padding: 1.15rem 1.25rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.cookie-banner.hidden {
+  transform: translateY(16px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cookie-banner-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.cookie-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cookie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cookie-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-rust);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cookie-code {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  margin-left: auto;
+  margin-right: 0.75rem;
+}
+
+.cookie-close {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 1.3rem;
+  line-height: 1;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: color var(--trans-fast);
+}
+
+.cookie-close:hover {
+  color: var(--text-primary);
+}
+
+.cookie-text {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.cookie-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-top: 0.25rem;
+}
+
+.cookie-btn {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.cookie-accept {
+  background: var(--accent-rust);
+  color: var(--text-primary);
+  border: 1px solid transparent;
+}
+
+.cookie-accept:hover {
+  background: var(--accent-rust-hover);
+}
+
+.cookie-essential {
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-hairline);
+}
+
+.cookie-essential:hover {
+  background: var(--bg-highlight);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+@media (max-width: 640px) {
+  .cookie-banner {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+    max-width: none;
+  }
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN BREAKPOINTS
    ========================================================================== */

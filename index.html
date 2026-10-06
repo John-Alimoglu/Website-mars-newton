@@ -825,10 +825,40 @@
       </div>
       <div class="footer-secondary">
         <span class="footer-meta">Mars 2020 Mission · Ingenuity Mars Helicopter · 72 Completed Flights</span>
-        <a href="#top" class="back-to-top" aria-label="Back to top of page">Return to Top ↑</a>
+        <div class="footer-actions-row">
+          <button type="button" id="link-cookie-preferences" class="footer-cookie-link">Cookie Preferences</button>
+          <span class="footer-sep" aria-hidden="true">·</span>
+          <a href="#top" class="back-to-top" aria-label="Back to top of page">Return to Top ↑</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- Cookie / Telemetry Consent Popup Banner -->
+  <aside 
+    id="cookie-banner" 
+    class="cookie-banner" 
+    role="region" 
+    aria-label="Cookie and telemetry preferences" 
+    aria-live="polite"
+  >
+    <div class="cookie-banner-inner">
+      <div class="cookie-content">
+        <div class="cookie-header">
+          <span class="cookie-badge"><span class="pulse-dot" aria-hidden="true"></span>COOKIE & TELEMETRY NOTICE</span>
+          <span class="cookie-code">DATA-SPEC 02</span>
+          <button type="button" class="cookie-close" id="btn-cookie-close" aria-label="Dismiss cookie notice">×</button>
+        </div>
+        <p class="cookie-text">
+          This educational exhibit uses essential cookies and local session storage to preserve your simulation state, telemetry preferences, and flight metrics across Jezero Crater.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="cookie-btn cookie-accept" id="btn-cookie-accept">Accept All</button>
+        <button type="button" class="cookie-btn cookie-essential" id="btn-cookie-essential">Essential Only</button>
+      </div>
+    </div>
+  </aside>
 
   <script src="app.js"></script>
 </body>
