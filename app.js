@@ -1,47 +1,57 @@
 /**
- * Newton’s Laws of Motion on Mars — Interactive Museum Scripts
- * Accessible, zero-dependency vanilla JS for physical simulations
+ * Newton’s Laws of Motion on Mars — Interactive Drone Flight Scripts
+ * NASA Ingenuity Mars Helicopter physical simulations
+ * Zero-dependency, accessible vanilla JS
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initLawOne();
   initLawTwo();
-  initRoverSubsystems();
+  initDroneSubsystems();
 });
 
 /* ==========================================================================
-   LAW ONE: STATE TRANSITION DIAGRAM (INERTIA & FORCES)
+   LAW ONE: STATE TRANSITION DIAGRAM (INERTIA & FLIGHT STATES)
    ========================================================================== */
 
 function initLawOne() {
   const phaseButtons = document.querySelectorAll('.phase-btn');
   const stateLabel = document.getElementById('law1-state-label');
   const explanationEl = document.getElementById('law1-phase-explanation');
-  const vecDrive = document.getElementById('law1-vec-drive');
-  const vecResist = document.getElementById('law1-vec-resist');
+
+  // SVG Elements
+  const droneChassis = document.getElementById('law1-drone-chassis');
+  const vecNormal = document.getElementById('law1-vec-normal');
+  const vecThrust = document.getElementById('law1-vec-thrust');
+  const thrustLabel = document.getElementById('law1-thrust-label');
   const velText = document.getElementById('law1-vel-text');
 
   const phases = {
     rest: {
-      label: 'STATE A: REST',
-      explanation: '<strong>Phase A (Static Equilibrium):</strong> Vertical forces balance exactly (<span class="code">N = W = 3,813 N</span>). No horizontal driving force exists. Net force <span class="code">ΣF = 0</span>, so the rover remains indefinitely at rest.',
-      driveOpacity: '0',
-      resistOpacity: '0',
+      label: 'STATE A: REST ON SURFACE',
+      explanation: '<strong>Phase A (Static Equilibrium on Ground):</strong> Normal force from the Martian bedrock balances gravity exactly (<span class="code">N = W = 6.70 N</span>). Rotors are idle (<span class="code">Thrust = 0 N</span>). Net force <span class="code">ΣF = 0</span>, so the drone remains stationary at rest on its landing legs.',
+      droneTransform: 'translate(270, 205)',
+      normalOpacity: '1',
+      thrustOpacity: '0',
       velText: 'VELOCITY v = 0.00 m/s (ΣF = 0)'
     },
-    drive: {
-      label: 'STATE B: MOTOR FORCE APPLIED',
-      explanation: '<strong>Phase B (Unbalanced Driving Force):</strong> In-wheel hub motors apply torque, generating <span class="rust font-bold">F_motor = +350 N</span> forward, exceeding the static ground resistance (<span class="code">f_resist ≈ 50 N</span>). An unbalanced net horizontal force exists (<span class="code">ΣF = +300 N</span>), changing the rover’s state of motion from rest to acceleration.',
-      driveOpacity: '1',
-      resistOpacity: '0.4',
-      velText: 'ACCELERATING (ΣF = +300 N > 0)'
+    climb: {
+      label: 'STATE B: THRUST EXCEEDS WEIGHT',
+      explanation: '<strong>Phase B (Unbalanced Vertical Force):</strong> Counter-rotating carbon-fiber blades spin past 2,400 RPM, producing <span class="rust font-bold">Thrust = 9.50 N</span> upward. Because upward thrust exceeds downward Mars gravity (<span class="code">W = 6.70 N</span>), an unbalanced net force exists (<span class="code">ΣF_y = +2.80 N</span>), accelerating the 1.8 kg drone upward into the thin Martian sky.',
+      droneTransform: 'translate(270, 140)',
+      normalOpacity: '0',
+      thrustOpacity: '1',
+      thrustText: 'Thrust T = 9.5 N',
+      velText: 'CLIMBING ACCELERATION (ΣF = +2.80 N > 0)'
     },
-    moving: {
-      label: 'STATE C: MOTORS IDLE & TERRAIN RESISTANCE',
-      explanation: '<strong>Phase C (Opposing External Resistance):</strong> When motors disengage (<span class="code">F_motor = 0</span>), the rover does not continue rolling forever. Contact forces from the loose Martian regolith, slope inclines, and wheel bearing drag exert an opposing backward resistance. This unbalanced external force decelerates the rover back to a complete stop.',
-      driveOpacity: '0',
-      resistOpacity: '1',
-      velText: 'DECELERATING (ΣF = -60 N < 0)'
+    hover: {
+      label: 'STATE C: STEADY HOVER EQUILIBRIUM',
+      explanation: '<strong>Phase C (Dynamic Equilibrium / Hover):</strong> At cruising altitude (e.g., 5 meters), the flight computer throttles rotor RPM until aerodynamic thrust matches Martian gravity (<span class="code">Thrust = W = 6.70 N</span>). Net vertical force is again zero (<span class="code">ΣF_y = 0</span>). Under Newton’s First Law, zero net force means constant velocity—in this case, zero vertical velocity, locking in a steady hover.',
+      droneTransform: 'translate(270, 100)',
+      normalOpacity: '0',
+      thrustOpacity: '1',
+      thrustText: 'Thrust T = 6.7 N (T = W)',
+      velText: 'HOVERING AT CONSTANT ALTITUDE (ΣF = 0)'
     }
   };
 
@@ -57,19 +67,23 @@ function initLawOne() {
       stateLabel.textContent = data.label;
       explanationEl.innerHTML = data.explanation;
 
-      if (vecDrive) vecDrive.setAttribute('opacity', data.driveOpacity);
-      if (vecResist) vecResist.setAttribute('opacity', data.resistOpacity);
+      if (droneChassis) droneChassis.setAttribute('transform', data.droneTransform);
+      if (vecNormal) vecNormal.setAttribute('opacity', data.normalOpacity);
+      if (vecThrust) vecThrust.setAttribute('opacity', data.thrustOpacity);
+      if (thrustLabel && data.thrustText) thrustLabel.textContent = data.thrustText;
       if (velText) velText.textContent = data.velText;
     });
   });
 }
 
 /* ==========================================================================
-   LAW TWO: F = ma INTERACTIVE LAB & SIMULATOR
+   LAW TWO: F = ma INTERACTIVE LAB & FLIGHT SIMULATOR
    ========================================================================== */
 
 function initLawTwo() {
-  const ROVER_MASS = 1025; // kg (NASA Perseverance specification)
+  const DRONE_MASS = 1.8; // kg (NASA Ingenuity specification)
+  const MARS_GRAVITY = 3.72; // m/s^2
+  const DRONE_WEIGHT = DRONE_MASS * MARS_GRAVITY; // 6.696 N ≈ 6.70 N
 
   const slider = document.getElementById('force-slider');
   const sliderReadout = document.getElementById('slider-val-readout');
@@ -78,71 +92,62 @@ function initLawTwo() {
   const presetBtns = document.querySelectorAll('.preset-btn');
 
   // SVG Elements
-  const forceLine = document.getElementById('sim-force-line');
-  const forceText = document.getElementById('sim-force-text');
-  const accelLine = document.getElementById('sim-accel-line');
-  const accelText = document.getElementById('sim-accel-text');
-  const roverGroup = document.getElementById('sim-rover-group');
+  const thrustLine = document.getElementById('sim-thrust-line');
+  const thrustText = document.getElementById('sim-thrust-text');
+  const droneGroup = document.getElementById('sim-drone-group');
+  const accelBadgeText = document.getElementById('sim-accel-badge-text');
   const telemetry = document.getElementById('sim-telemetry');
 
   // Sim Buttons
   const btnRun = document.getElementById('btn-run-sim');
   const btnReset = document.getElementById('btn-reset-sim');
 
-  let currentForce = 250;
+  let currentThrust = 8.5;
   let isSimulating = false;
   let simAnimId = null;
-  const initialRoverX = 60;
+  const initialDroneY = 150; // SVG surface altitude baseline
 
-  function updatePhysics(forceValue) {
-    currentForce = Number(forceValue);
-    const accel = currentForce / ROVER_MASS; // a = F / m in m/s^2
+  function updatePhysics(thrustValue) {
+    currentThrust = Number(thrustValue);
+    const netForce = currentThrust - DRONE_WEIGHT; // F_net = Thrust - Weight
+    const accel = netForce / DRONE_MASS; // a = F_net / m in m/s^2
 
     // Update Numerical Text Displays
-    sliderReadout.textContent = `${currentForce} Newtons`;
-    forceDisplay.innerHTML = `${currentForce} <span class="unit">N</span>`;
-    accelDisplay.innerHTML = `${accel.toFixed(3)} <span class="unit">m/s²</span>`;
+    sliderReadout.textContent = `${currentThrust.toFixed(2)} Newtons`;
+    
+    const signPrefix = netForce > 0 ? '+' : '';
+    forceDisplay.innerHTML = `${signPrefix}${netForce.toFixed(2)} <span class="unit">N</span>`;
+    accelDisplay.innerHTML = `${signPrefix}${accel.toFixed(3)} <span class="unit">m/s²</span>`;
 
     // Update Slider Attributes
-    slider.value = currentForce;
-    slider.setAttribute('aria-valuenow', currentForce);
+    slider.value = currentThrust;
+    slider.setAttribute('aria-valuenow', currentThrust);
 
-    // Vector lengths:
-    // Base force arrow: origin x1=105, x2 = 105 + (force / 600) * 110
-    const maxForceLength = 100;
-    const forceLength = (currentForce / 600) * maxForceLength;
-    if (forceLine) {
-      forceLine.setAttribute('x2', (105 + forceLength).toString());
-      if (currentForce === 0) {
-        forceLine.setAttribute('opacity', '0');
-        forceText.setAttribute('opacity', '0');
+    // Vector lengths for Thrust Arrow:
+    // Base line: origin y1 = -46, y2 = -46 - (thrust / 14) * 90
+    const maxThrustLength = 95;
+    const thrustLength = (currentThrust / 14) * maxThrustLength;
+    if (thrustLine) {
+      if (currentThrust === 0) {
+        thrustLine.setAttribute('opacity', '0');
+        thrustText.setAttribute('opacity', '0');
       } else {
-        forceLine.setAttribute('opacity', '1');
-        forceText.setAttribute('opacity', '1');
-        forceText.setAttribute('x', (105 + forceLength / 2).toString());
-        forceText.textContent = `F = ${currentForce} N`;
+        thrustLine.setAttribute('opacity', '1');
+        thrustText.setAttribute('opacity', '1');
+        thrustLine.setAttribute('y2', (-46 - thrustLength).toString());
+        thrustText.setAttribute('y', (-46 - thrustLength / 2).toString());
+        thrustText.textContent = `T = ${currentThrust.toFixed(1)} N`;
       }
     }
 
-    // Acceleration arrow: origin x1=65, x2 = 65 + (accel / 0.585) * 80
-    const maxAccelLength = 80;
-    const accelLength = (accel / 0.585) * maxAccelLength;
-    if (accelLine) {
-      accelLine.setAttribute('x2', (65 + accelLength).toString());
-      if (accel === 0) {
-        accelLine.setAttribute('opacity', '0');
-        accelText.setAttribute('opacity', '0');
-      } else {
-        accelLine.setAttribute('opacity', '1');
-        accelText.setAttribute('opacity', '1');
-        accelText.setAttribute('x', (65 + accelLength / 2).toString());
-        accelText.textContent = `a = ${accel.toFixed(2)} m/s²`;
-      }
+    // Acceleration Badge Text
+    if (accelBadgeText) {
+      accelBadgeText.textContent = `${signPrefix}${accel.toFixed(2)} m/s²`;
     }
 
     // Update Active Preset Highlight
     presetBtns.forEach((btn) => {
-      if (Number(btn.dataset.force) === currentForce) {
+      if (Math.abs(Number(btn.dataset.force) - currentThrust) < 0.05) {
         btn.classList.add('active');
       } else {
         btn.classList.remove('active');
@@ -164,59 +169,61 @@ function initLawTwo() {
     });
   });
 
-  // Rover Motion Simulation
-  function resetRoverPosition() {
+  // Drone Flight Simulation
+  function resetDroneAltitude() {
     if (simAnimId) cancelAnimationFrame(simAnimId);
     isSimulating = false;
-    if (roverGroup) {
-      roverGroup.setAttribute('transform', `translate(${initialRoverX}, 50)`);
+    if (droneGroup) {
+      droneGroup.setAttribute('transform', `translate(270, ${initialDroneY})`);
     }
-    telemetry.innerHTML = `<span>STATUS: READY</span> · <span>POSITION: 0.00 m</span>`;
-    btnRun.innerHTML = `<span class="btn-icon" aria-hidden="true">▶</span> <span class="btn-text">Test Accelerate Across Regolith</span>`;
+    telemetry.innerHTML = `<span>STATUS: READY</span> · <span>ALTITUDE: 0.00 m</span>`;
+    btnRun.innerHTML = `<span class="btn-icon" aria-hidden="true">▶</span> <span class="btn-text">Test Fly Vertical Ascent</span>`;
   }
 
   function runSimulation() {
     if (isSimulating) {
-      resetRoverPosition();
+      resetDroneAltitude();
       return;
     }
 
-    const accel = currentForce / ROVER_MASS;
+    const netForce = currentThrust - DRONE_WEIGHT;
+    const accel = netForce / DRONE_MASS;
+
     if (accel <= 0) {
-      telemetry.innerHTML = `<span class="rust">CANNOT ACCELERATE: F = 0 N (LAW 1)</span>`;
+      telemetry.innerHTML = `<span class="rust">CANNOT CLIMB: THRUST ≤ WEIGHT (${currentThrust.toFixed(1)} N ≤ 6.7 N)</span>`;
       return;
     }
 
     isSimulating = true;
-    btnRun.innerHTML = `<span class="btn-icon" aria-hidden="true">■</span> <span class="btn-text">Stop Simulation</span>`;
+    btnRun.innerHTML = `<span class="btn-icon" aria-hidden="true">■</span> <span class="btn-text">Stop Flight</span>`;
 
     const startTimestamp = performance.now();
-    const maxTrackDistanceMeters = 10.0;
-    const maxPixelDisplacement = 340; // Max SVG travel distance before boundary
+    const maxAltitudeMeters = 10.0;
+    const maxPixelDisplacement = 110; // Travel up from y=150 to y=40
 
     function step(timestamp) {
       if (!isSimulating) return;
 
       const elapsedSeconds = (timestamp - startTimestamp) / 1000;
-      // Physics motion formula: d = 0.5 * a * t^2
-      // Using a time scale multiplier so motion is pleasant to watch
-      const simTime = elapsedSeconds * 2.2;
-      const distanceMeters = 0.5 * accel * (simTime * simTime);
+      // Motion formula: d = 0.5 * a * t^2
+      // Using an educational time-scale multiplier
+      const simTime = elapsedSeconds * 1.5;
+      const altitudeMeters = 0.5 * accel * (simTime * simTime);
       const currentVelocity = accel * simTime;
 
-      // Fraction of track completed
-      const progress = Math.min(distanceMeters / maxTrackDistanceMeters, 1);
-      const currentPixelX = initialRoverX + progress * maxPixelDisplacement;
+      // Fraction of target ceiling completed
+      const progress = Math.min(altitudeMeters / maxAltitudeMeters, 1);
+      const currentPixelY = initialDroneY - progress * maxPixelDisplacement;
 
-      roverGroup.setAttribute('transform', `translate(${currentPixelX}, 50)`);
-      telemetry.innerHTML = `<span>STATUS: CRAWLING</span> · <span>v: ${(currentVelocity * 100).toFixed(1)} cm/s</span> · <span>DIST: ${distanceMeters.toFixed(2)} m</span>`;
+      droneGroup.setAttribute('transform', `translate(270, ${currentPixelY})`);
+      telemetry.innerHTML = `<span>STATUS: CLIMBING</span> · <span>v_y: ${currentVelocity.toFixed(2)} m/s</span> · <span>ALT: ${altitudeMeters.toFixed(2)} m</span>`;
 
       if (progress < 1) {
         simAnimId = requestAnimationFrame(step);
       } else {
         isSimulating = false;
-        telemetry.innerHTML = `<span>STATUS: CRUISE SPEED REACHED</span> · <span>DIST: 10.00 m</span>`;
-        btnRun.innerHTML = `<span class="btn-icon" aria-hidden="true">↺</span> <span class="btn-text">Repeat Run</span>`;
+        telemetry.innerHTML = `<span>STATUS: TARGET CEILING REACHED (10.00 m)</span> · <span>HOVER COMMENCED</span>`;
+        btnRun.innerHTML = `<span class="btn-icon" aria-hidden="true">↺</span> <span class="btn-text">Fly Again</span>`;
       }
     }
 
@@ -224,60 +231,60 @@ function initLawTwo() {
   }
 
   btnRun.addEventListener('click', runSimulation);
-  btnReset.addEventListener('click', resetRoverPosition);
+  btnReset.addEventListener('click', resetDroneAltitude);
 
   // Initial Calculation
   updatePhysics(slider.value);
 }
 
 /* ==========================================================================
-   MARS ROVER SYSTEMS: INTERACTIVE SUBSYSTEM INSPECTOR
+   MARS DRONE SYSTEMS: INTERACTIVE SUBSYSTEM INSPECTOR
    ========================================================================== */
 
-function initRoverSubsystems() {
+function initDroneSubsystems() {
   const subsystems = {
-    wheels: {
-      tag: 'SUBSYSTEM 01 / TRACTION & INTERFACE',
-      title: 'Wheels (Machined Aluminum Rims & Grousers)',
+    rotors: {
+      tag: 'SUBSYSTEM 01 / AERODYNAMIC LIFT',
+      title: 'Coaxial Rotor Blades (Dual 1.2 m Disks)',
       law: 'PRIMARY CONNECTION: <strong>NEWTON’S THIRD LAW (ACTION & REACTION)</strong>',
-      desc: 'Perseverance carries six 52.5 cm diameter wheels machined from solid aircraft-grade aluminum, reinforced with curved titanium spokes to absorb terrain shock. Forty-eight curved cleats (grousers) bite into the regolith. Each cleat pushes backward into the sand (Action) so that the Martian surface pushes forward on the wheel (Reaction) to generate traction.',
+      desc: 'Ingenuity employs two counter-rotating 1.2-meter diameter rotors made of carbon-fiber skins wrapped around a lightweight foam core. Spinning at 2,400 to 2,700 RPM, they force thin carbon-dioxide molecules downward (Action) so the air pushes the blades upward (Reaction). The counter-rotating design cancels torque reaction so the drone does not spin out of control.',
       metrics: [
-        { name: 'Diameter', val: '52.5 cm' },
-        { name: 'Material', val: 'Aircraft Al 7075-T73' },
-        { name: 'Cleats', val: '48 Curved Grousers' }
+        { name: 'Rotor Span', val: '1.2 meters' },
+        { name: 'Spin Rate', val: '2,400–2,700 RPM' },
+        { name: 'Construction', val: 'Carbon-fiber composite' }
       ]
     },
     motors: {
-      tag: 'SUBSYSTEM 02 / ACTUATION & TORQUE',
-      title: 'Drive & Steering Actuators (Brushless DC Motors)',
+      tag: 'SUBSYSTEM 02 / ACTUATION & CONTROL',
+      title: 'Brushless DC Motors & Collective Swashplates',
       law: 'PRIMARY CONNECTIONS: <strong>NEWTON’S FIRST & SECOND LAWS (F = ma)</strong>',
-      desc: 'Each of the six wheels houses an independent brushless DC gearmotor inside its sealed hub, with separate steering motors on the four corner wheels. The motors supply the torque needed to generate an unbalanced external driving force (Law 1) and calibrate output according to F = ma to accelerate the 1,025 kg rover safely without blowing fuses or inducing excessive wheel spin (Law 2).',
+      desc: 'Independent brushless DC motors power each rotor through collective and cyclic swashplate linkages. Altering collective blade angle adjusts total upward thrust to break equilibrium for climbing (Law 1) and meter acceleration (Law 2). Altering cyclic pitch tilts the rotor disk forward or laterally, creating horizontal thrust to sprint across Jezero Crater.',
       metrics: [
-        { name: 'Drive Motors', val: '6 In-Wheel Hubs' },
-        { name: 'Steering Motors', val: '4 Corner Pivots' },
-        { name: 'Gear Ratio', val: '~298:1 Planetary' }
+        { name: 'Drive Motors', val: '2 Brushless DC' },
+        { name: 'Control Loop', val: '500 Hz Auto-pilot' },
+        { name: 'Pitch Control', val: 'Cyclic & Collective' }
       ]
     },
-    suspension: {
-      tag: 'SUBSYSTEM 03 / WEIGHT DISTRIBUTION',
-      title: 'Rocker-Bogie Articulated Suspension',
-      law: 'PRIMARY CONNECTIONS: <strong>NEWTON’S FIRST & SECOND LAWS (FORCE BALANCE)</strong>',
-      desc: 'A passive mechanical linkage without traditional springs. The rocker-bogie mechanism connects left and right wheel assemblies through a top-mounted differential pivot. As the rover climbs over rocks up to 40 cm tall, the suspension ensures all six wheels maintain equal normal force (N = mg/6) against the ground, preventing rollover and preserving continuous forward tractive contact.',
+    fuselage: {
+      tag: 'SUBSYSTEM 03 / ULTRALIGHT MASS BUDGET',
+      title: 'Fuselage & Avionics Chassis (1.8 kg Mass Budget)',
+      law: 'PRIMARY CONNECTION: <strong>NEWTON’S SECOND LAW (INERTIAL MASS)</strong>',
+      desc: 'The insulated cube fuselage houses six Sony lithium-ion battery cells, a Qualcomm Snapdragon processor, an IMU, laser altimeter, and downward navigation camera. To keep inertia low enough that aerodynamic forces in thin air can accelerate the vehicle (a = F/m), every single component was stripped to bare grams, achieving an unprecedented 1.8 kg flight-ready mass.',
       metrics: [
-        { name: 'Rock Clearance', val: 'Up to 40 cm' },
-        { name: 'Tilt Stability', val: 'Up to 45° slope' },
-        { name: 'Mechanism', val: 'Springless Rocker-Bogie' }
+        { name: 'Total Mass', val: '1.8 kg (4.0 lb)' },
+        { name: 'Energy Storage', val: '35–43 Wh (6 Li-ion)' },
+        { name: 'Core Computer', val: 'Snapdragon 801 Linux' }
       ]
     },
-    ground: {
-      tag: 'SUBSYSTEM 04 / REACTIVE MEDIUM',
-      title: 'Ground Contact & Martian Regolith Mechanics',
-      law: 'PRIMARY CONNECTION: <strong>NEWTON’S THIRD LAW & FRICTION THRESHOLDS</strong>',
-      desc: 'The rover cannot move without the ground pushing back. Because Mars gravity is only 3.72 m/s², the total normal force on the soil is 3,813 N (compared to 10,055 N on Earth). This reduced normal force lowers the shear threshold of loose powdery sand, making terramechanics and soil reaction forces the single greatest operational constraint for Perseverance.',
+    legs: {
+      tag: 'SUBSYSTEM 04 / TOUCHDOWN DAMPING',
+      title: 'Landing Legs & Carbon Composite Struts',
+      law: 'PRIMARY CONNECTIONS: <strong>NEWTON’S FIRST & THIRD LAWS</strong>',
+      desc: 'Four slender carbon-fiber composite legs span outward at a wide stance for tipping stability. When Ingenuity cuts motor thrust over its landing site and descends, the legs strike the Martian regolith. Under Newton’s Third Law, the ground exerts an upward impact reaction force on the footpads, which the flexible carbon struts flex and damp to bring downward momentum safely to rest.',
       metrics: [
-        { name: 'Gravity (Mars)', val: '3.72 m/s² (~38% g)' },
-        { name: 'Normal Force', val: '3,813 N Total' },
-        { name: 'Friction Coeff (μ)', val: '0.35–0.55 typical' }
+        { name: 'Leg Material', val: 'Carbon-fiber composite' },
+        { name: 'Stance Width', val: '~38.4 cm stance' },
+        { name: 'Damping', val: 'Elastic structural flex' }
       ]
     }
   };
@@ -343,7 +350,7 @@ function initRoverSubsystems() {
     });
   });
 
-  // Event Listeners for Direct Hotspots on Rover Diagram
+  // Event Listeners for Direct Hotspots on Drone Diagram
   hotspots.forEach(hotspot => {
     hotspot.addEventListener('click', () => {
       selectPart(hotspot.dataset.part);
